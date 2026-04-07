@@ -52,7 +52,6 @@ void insert_at_beginning(struct Node **head, int value){
 	printf("after insertion *head = %p\n", (void*)*head);
 }
 
-
 void insert_at_end(struct Node **head, int value){
 	printf("\n--- insert_at_end(%d) called ---\n", value);
 	
@@ -83,17 +82,51 @@ void insert_at_end(struct Node **head, int value){
 	printf("New node inserted at end.\n");
 }
 
+void insert_after_value(struct Node *head, int target, int value){
+	printf("\n--- insert_after_value(target=%d, value=%d) ---\n", target, value);
+	
+	if (head == NULL){
+		printf("List is empty. Cannot insert. \n");
+		return;
+	}
+	
+	struct Node *current = head;
+	
+	while (current != NULL && current->data != target) {
+		printf("Checking node: %d\n", current->data);
+		current = current->next;
+	}
+	
+	if (current == NULL){
+		printf("Value %d not found.\n", target);
+		return;
+	}
+	
+	printf("Target found at node with data = %d\n", current->data);
+	
+	struct Node *newNode = create_node(value);
+	
+	if (newNode == NULL){
+		return;
+	}
+	
+	newNode->next = current->next;
+	current->next = newNode;
+	
+	printf("Inserted %d after %d\n", value, target);
+}
+
 int main(void){
 	
 	struct Node *head = NULL;
 	
 	insert_at_end(&head, 10);
-    print_list(head);
-
     insert_at_end(&head, 20);
+    insert_at_end(&head, 30);
+	
     print_list(head);
 
-    insert_at_end(&head, 30);
+    insert_after_value(head, 20, 25);
     print_list(head);
 	
 	return 0;
