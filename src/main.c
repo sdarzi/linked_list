@@ -53,15 +53,48 @@ void insert_at_beginning(struct Node **head, int value){
 }
 
 
+void insert_at_end(struct Node **head, int value){
+	printf("\n--- insert_at_end(%d) called ---\n", value);
+	
+	struct Node *newNode = create_node(value);
+	
+	if (newNode == NULL){
+		return;
+	}
+	
+	if (*head == NULL) {
+		printf("List is empty, new node becomes head. \n");
+		*head = newNode;
+		return;
+	}
+	
+	struct Node *current = *head;
+	
+	printf("Traversing list...\n");
+	
+	while (current->next != NULL) {
+		printf("At node with data = %d\n", current->data);
+		current = current->next;
+	}
+	
+	printf("last node found: %d\n", current->data);
+	current->next = newNode;
+	
+	printf("New node inserted at end.\n");
+}
+
 int main(void){
 	
 	struct Node *head = NULL;
 	
-	insert_at_beginning(&head, 10);
-	print_list(head);
-	
-	insert_at_beginning(&head, 5);
-	print_list(head);
+	insert_at_end(&head, 10);
+    print_list(head);
+
+    insert_at_end(&head, 20);
+    print_list(head);
+
+    insert_at_end(&head, 30);
+    print_list(head);
 	
 	return 0;
 }

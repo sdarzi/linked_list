@@ -5,9 +5,9 @@ WORK IN PROGRESS
 
 Currently implemented:
 - Insert at start
+- Insert at end
 
 Planned:
-- Insert at end
 - Insert after a value
 - Delete first node
 - Delte by value
